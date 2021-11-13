@@ -1,3 +1,7 @@
+* {
+    font-family: 'Roboto', sans-serif;
+}
+
 header {
     width: 100%;
     height: 80px;
@@ -21,7 +25,60 @@ ion-icon:hover {
     cursor: pointer;
 }
 
-header a {
+header img {
     margin-left: 22px;
 }
 
+header img:hover {
+    cursor: pointer;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+
+    width: 100%;
+    height: 80px;
+
+    background-color: white;
+    box-shadow: 0px -4px 6px rgba(0, 0, 0, 0.05);
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+footer ion-icon {
+    font-size: 26px;
+    margin-right: 22px;
+}
+
+footer input {
+    margin-left: 22px;
+
+}
+
+input {
+    border: 0;
+    width: 80vw;
+    height: 70px;
+
+    font-family: Roboto;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 21px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: black;
+}
+
+input:focus {
+    outline: 0;
+}
+
+input::placeholder {
+    color: black;
+    font-style: italic;
+}
