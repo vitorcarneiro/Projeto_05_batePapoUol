@@ -25,21 +25,60 @@
         <script src="script.js" defer></script>
         
         <header>
-                <img src="./images/logo_uol.png" alt="logo_uol">
+                <img onclick="alert (`test`)" src="./images/logo_uol.png" alt="logo_uol">
             
-            <ion-icon onclick="" name="people"></ion-icon>
+            <ion-icon onclick="alert (`test`)" name="people"></ion-icon>
 
         </header>
         
         <main>
-            <!-- Chat em divs -->
+            <div class="in-out-message">
+                <div class="message" data-identifier="message">
+                    <span class="time">(09:21:45) </span>
+                    <span class="from">Joao </span>
+                    <span class="messageStatus">entra na sala...</span>
+                </div>
+            </div>
+
+            <div class="message-box">
+                <div class="message" data-identifier="message">
+                    <span class="time">(09:22:28)</span>
+                    <span class="from">Joao</span>
+                    <span class="messageStatus">para</span>
+                    <span class="to">Todos: </span>
+                    <span class="text">Bom dia </span>
+                </div>
+            </div>
+
+            <div class="message-box">
+                <div class="message" data-identifier="message">
+                    <span class="time">(09:22:38)</span>
+                    <span class="from">Maria</span>
+                    <span class="messageStatus">para</span>
+                    <span class="to">Joao: </span>
+                    <span class="text">Oi Joao :)</span>
+                </div>
+            </div>
+
+            <div class="private-message">
+                <div class="message" data-identifier="message">
+                    <span class="time">(09:22:38)</span>
+                    <span class="from">Joao</span>
+                    <span class="messageStatus">reservadamente para</span>
+                    <span class="to">Maria:</span>
+                    <span class="text">Oi gatinha quer tc?</span>
+                </div>
+            </div>
+
+        
+
+
         </main>
         
         <footer>
-            <!-- Mensagem digitada -->
-            <input type="text" placeholder="Escreva aqui...">
+            <input type="text" placeholder="Escreva aqui..." data-identifier="send-message">
             
-            <ion-icon name="paper-plane-outline"></ion-icon>
+            <ion-icon onclick="alert (`test`)" name="paper-plane-outline"></ion-icon>
         </footer>
         
         <aside>
