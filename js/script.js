@@ -1,14 +1,18 @@
-const name = Math.random();
+let name = "";
+let toSend = "Todos";
+let typeMessage = "message";
 let numberOfMessages = 0;
 let messagesRaw = [];
 let messagesHTML = [];
+let textMessage = "";
 
 let messagesBody = document.querySelector("main");
 messagesBody.innerHTML = "";
 
 function enterRoom() {
-    const promisse = axios.post(
-      "https://mock-api.driven.com.br/api/v4/uol/participants",
+  name = prompt ("Qual é o seu nome?");
+
+  const promisse = axios.post("https://mock-api.driven.com.br/api/v4/uol/participants",
       {
         name: `${(name)}`
       }
@@ -32,7 +36,9 @@ function successRoom(reply) {
 
 function errorRoom(error) {
   if (error.response.status === 400) {
-    console.log("Usuário já cadastrado");
+    alert("Usuário já cadastrado, escolha outro nome.");
+
+    main();
   }
 }
 
@@ -44,8 +50,6 @@ function promisseMessages() {
 }
 
 function getMessages(messagesObject) {
-  console.log("entrou");
-
   promisseMessages();
 
   messagesRaw = messagesObject.data;
@@ -55,6 +59,8 @@ function getMessages(messagesObject) {
   convertMessagesToHTML();
 
   printMessages();
+
+  console.log("ok");
 }
 
 function errorMessages(errorObject) {
@@ -128,6 +134,25 @@ function printMessages() {
   messagesBody.scrollIntoView({block: "end"});
 }
 
+function sendMessage() {
+  textMessage = document.querySelector("input").value;
+
+  console.log(textMessage);
+
+  let promissedMessage = axios.post(`https://mock-api.driven.com.br/api/v4/uol/messages`,
+  {
+    from: `${name}`,
+    to: `${toSend}`,
+    text: `${textMessage}`,
+    type: `${typeMessage}`
+  });
+  promissedMessage.then(successMessage); 
+  promissedMessage.catch(errorMessage);
+
+}
+
+
+
 function main() {
   enterRoom();
 
@@ -135,7 +160,7 @@ function main() {
   
   getMessages();
 
-  setInterval (getMessages, 30000);
+  setInterval(getMessages, 3000);
 }
 
 main();
