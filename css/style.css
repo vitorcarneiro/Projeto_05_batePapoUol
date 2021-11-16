@@ -94,7 +94,7 @@ main {
     padding-bottom: calc(80px + 26px);
 }
 
-.message-box, .in-out-message, .private-message {
+.message, .status, .private_message {
     padding-left: 8px;
     padding-top: 8px;
     padding-bottom: 8px;
@@ -109,15 +109,15 @@ main {
     align-items: center;
 }
 
-.in-out-message {
+.status {
     background-color: #DCDCDC;
 }
 
-.private-message {
+.private_message {
     background-color: #FFDEDE;
 }
 
-.message { 
+.message-text { 
     font-size: 14px;
     line-height: 20px;
     
