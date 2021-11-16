@@ -37,13 +37,17 @@ function errorRoom(error) {
 }
 
 function promisseMessages() {
-  const messagesPromisse = axios.get(`https://mock-api.driven.com.br/api/v4/uol/messages`);
+  let messagesPromisse = axios.get(`https://mock-api.driven.com.br/api/v4/uol/messages`);
 
   messagesPromisse.then(getMessages); 
   messagesPromisse.catch(errorMessages);
 }
 
 function getMessages(messagesObject) {
+  console.log("entrou");
+
+  promisseMessages();
+
   messagesRaw = messagesObject.data;
 
   numberOfMessages = messagesRaw.length;
@@ -59,10 +63,11 @@ function errorMessages(errorObject) {
 }
 
 function convertMessagesToHTML() {
+  let messagesCounter = 0;
   for (let i = 0; i < numberOfMessages; i++) {
     if (messagesRaw[i].type === "message"){
 
-      messagesHTML[i] = `
+      messagesHTML[messagesCounter] = `
       <div class="${messagesRaw[i].type}">
         <div class="message-text" data-identifier="message">
           <span class="time">(${messagesRaw[i].time})</span>
@@ -73,23 +78,31 @@ function convertMessagesToHTML() {
         </div>
       </div>
       
-      `
+      `;
+      messagesCounter++;
     }
     else if (messagesRaw[i].type === "private_message"){
-      messagesHTML[i] = `
-      <div class="${messagesRaw[i].type}">
+      if (messagesRaw[i].to === name) {
+
+        messagesHTML[messagesCounter] = `
+        <div class="${messagesRaw[i].type}">
         <div class="message-text" data-identifier="message">
-          <span class="time">(${messagesRaw[i].time})</span>
-          <span class="from">${messagesRaw[i].from}</span>
-          <span class="messageStatus">reservadamente para</span>
-          <span class="to">${messagesRaw[i].to}: </span>
-          <span class="text">${messagesRaw[i].text} </span>
+        <span class="time">(${messagesRaw[i].time})</span>
+        <span class="from">${messagesRaw[i].from}</span>
+        <span class="messageStatus">reservadamente para</span>
+        <span class="to">${messagesRaw[i].to}: </span>
+        <span class="text">${messagesRaw[i].text} </span>
         </div>
-      </div>
-      
-      `
+        </div>
+        
+        `;
+        messagesCounter++;
+
+      } else {
+        messagesCounter++;
+      }
     } else {
-      messagesHTML[i] = `
+      messagesHTML[messagesCounter] = `
       <div class="${messagesRaw[i].type}">
         <div class="message-text" data-identifier="message">
           <span class="time">(${messagesRaw[i].time})</span>
@@ -98,15 +111,21 @@ function convertMessagesToHTML() {
         </div>
       </div>
       
-      `
+      `;
+      messagesCounter++;
+
     }
   }
 }
 
 function printMessages() {
+  messagesBody.innerHTML = "";
+
   for (let i = 0; i < numberOfMessages; i++) {
     messagesBody.innerHTML += messagesHTML[i];
   }
+
+  messagesBody.scrollIntoView({block: "end"});
 }
 
 function main() {
@@ -114,12 +133,9 @@ function main() {
 
   setInterval(keepOnline, 5000);
   
-  promisseMessages();
-
   getMessages();
 
-  printMessages();
-
+  setInterval (getMessages, 30000);
 }
 
 main();
