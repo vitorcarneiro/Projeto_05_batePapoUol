@@ -26,8 +26,8 @@
 
     <body>
         <header>
-            <img onclick="alert (`test`)" src="./images/logo_uol.png" alt="logo_uol">    
-            <ion-icon onclick="alert (`test`)" name="people"></ion-icon>
+            <img onclick="reloadPage()" src="./images/logo_uol.png" alt="logo_uol">    
+            <ion-icon onclick="showBar()" name="people"></ion-icon>
         </header>
         
         <main>
@@ -40,8 +40,15 @@
             <ion-icon onclick="sendMessage()" name="paper-plane-outline"></ion-icon>
         </footer>
         
-        <aside>
-            <!-- Menu direita escondido -->
+        <aside class="display-none">
+            <div class="dark-background" onclick="showBar()">
+            </div>
+            <div class="social-bar">
+                <div class="top-social-bar">
+                    Escolha um contato para enviar mensagem:
+                </div>
+            </div>
+            
         </aside>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>

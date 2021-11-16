@@ -5,9 +5,13 @@ let numberOfMessages = 0;
 let messagesRaw = [];
 let messagesHTML = [];
 let textMessage = "";
+let messagesPromisse;
+let promissedMessage;
 
 let messagesBody = document.querySelector("main");
 messagesBody.innerHTML = "";
+
+let socialBar = document.querySelector("aside");
 
 function enterRoom() {
   name = prompt ("Qual é o seu nome?");
@@ -27,7 +31,6 @@ function keepOnline() {
   {name: `${(name)}`
   });
 
-  console.log("keep");
 }
 
 function successRoom(reply) {
@@ -43,14 +46,13 @@ function errorRoom(error) {
 }
 
 function promisseMessages() {
-  let messagesPromisse = axios.get(`https://mock-api.driven.com.br/api/v4/uol/messages`);
+  messagesPromisse = axios.get(`https://mock-api.driven.com.br/api/v4/uol/messages`);
 
   messagesPromisse.then(getMessages); 
   messagesPromisse.catch(errorMessages);
 }
 
 function getMessages(messagesObject) {
-  promisseMessages();
 
   messagesRaw = messagesObject.data;
 
@@ -59,8 +61,6 @@ function getMessages(messagesObject) {
   convertMessagesToHTML();
 
   printMessages();
-
-  console.log("ok");
 }
 
 function errorMessages(errorObject) {
@@ -137,30 +137,48 @@ function printMessages() {
 function sendMessage() {
   textMessage = document.querySelector("input").value;
 
-  console.log(textMessage);
-
-  let promissedMessage = axios.post(`https://mock-api.driven.com.br/api/v4/uol/messages`,
+  promissedMessage = axios.post(`https://mock-api.driven.com.br/api/v4/uol/messages`,
   {
     from: `${name}`,
     to: `${toSend}`,
     text: `${textMessage}`,
     type: `${typeMessage}`
   });
+
+  textMessage = document.querySelector("input");
+  textMessage.value = "";
+
   promissedMessage.then(successMessage); 
   promissedMessage.catch(errorMessage);
-
 }
 
+function reloadPage(){
+  window.location.reload()
+}
 
+function showBar() {
+  socialBar.classList.toggle("display-none");
+}
 
 function main() {
   enterRoom();
 
   setInterval(keepOnline, 5000);
   
-  getMessages();
+  promisseMessages();
 
-  setInterval(getMessages, 3000);
+  setInterval(promisseMessages, 3000);
+
 }
 
 main();
+
+let input = document.querySelector("input");
+
+input.addEventListener("keyup", checkKeyPress, false);
+
+function checkKeyPress(key) {
+  if (key.keyCode == "13") {
+    sendMessage();
+  }
+}

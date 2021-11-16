@@ -5,6 +5,7 @@
 
 body{
     background-color: #E5E5E5;
+    
 }
 
 header {
@@ -100,7 +101,7 @@ main {
     padding-bottom: 8px;
     
     min-height: 40px;
-    width: 100vw;
+    width: 96vw;
     
     background-color: white;
     margin-bottom: 4px;
@@ -133,4 +134,53 @@ main {
 
 .from, .to {
     font-weight: 700;
+}
+
+aside {
+    width: 100vw;
+    height: 100vh;
+
+    position: fixed;
+    top: 0;
+    z-index: 2;
+
+    display: flex;
+}
+
+.dark-background {
+    width: 30%;
+    height: 100%;
+    
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.social-bar {
+    width: 70%;
+    height: 100%;
+
+    background-color: white;
+}
+
+.top-social-bar {
+    width: 100%;
+    height: 15%;
+
+    background-color: white;
+
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 19px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    color: #000000;
+
+    padding: 18%;
+}
+
+
+.display-none {
+    display: none;
 }
